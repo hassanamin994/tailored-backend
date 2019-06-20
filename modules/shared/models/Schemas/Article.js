@@ -3,17 +3,26 @@ const Schema = mongoose.Schema;
 
 const SLIDE_STATUS_ENUMS = ['processing', 'done'];
 const ARTICLE_TYPE_ENUM = ['original', 'translation'];
+const MEDIA_TYPES_ENUM = ['image', 'video', 'gif'];
+const SPEAKER_GENDER_ENUM = ['male', 'female'];
 
 const MediaSchema = new Schema({
     url: { type: String },
     duration: { type: String },
+    mediaType: { type: String, enum: MEDIA_TYPES_ENUM, default: 'image' },
 });
 
-const SlideSchema = new Schema({
+const SlideSpeakerSchema = new Schema({
     text: { type: String },
     audio: { type: String },
+    speakerGender: { type: String, enum: SPEAKER_GENDER_ENUM },
+})
+
+const SlideSchema = new Schema({
+    content: [SlideSpeakerSchema],
+    audio: { type: String }, // the content audios combined together
     medias: [MediaSchema],
-    video: { type: String },
+    video: { type: String }, // the medias combined with the audios
     position: { type: Number },
     duration: { type: Number },
     status: { type: String, enum: SLIDE_STATUS_ENUMS, default: 'done' },
