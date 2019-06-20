@@ -17,6 +17,7 @@ const SlideSchema = new Schema({
     position: { type: Number },
     duration: { type: Number },
     status: { type: String, enum: SLIDE_STATUS_ENUMS, default: 'done' },
+    commentsThread: { type: Schema.Types.ObjectId, ref: 'commentsThread' },
 });
 
 const ArticleSchema = new Schema({
@@ -24,6 +25,7 @@ const ArticleSchema = new Schema({
     version: { type: Number, default: 1 },
     slides: [SlideSchema],
     video: { type: Schema.Types.ObjectId, ref: 'video' },
+    commentsThread: { type: Schema.Types.ObjectId, ref: 'commentsThread' },
     /* 
         language field is the original language of the video
         when someone clones the article to translate it,
