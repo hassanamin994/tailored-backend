@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { SchemaNames } = require('./utils/schemaNames');
 
 const Comment = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'user' },
+    user: { type: Schema.Types.ObjectId, ref: SchemaNames.user },
     text: { type: String },
 })
 

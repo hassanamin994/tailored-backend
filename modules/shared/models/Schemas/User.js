@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { SchemaNames } = require('./utils/schemaNames');
 
 const USER_PERMISSIONS_ENUM = ['edit', 'update', 'translate'];
 const REGISTER_METHOD_ENUM = ['email', 'social', 'invite'];
@@ -17,7 +18,7 @@ const UserSchema = new Schema({
     inviteStatus: { type: String, enum: INVITE_STATUS_ENUM, default: 'accepted' },
     // User's Organization info
     organizationOwner: { type: Boolean, default: false },
-    organizations: { type: Schema.Types.ObjectId, ref: 'organization' },
+    organization: { type: Schema.Types.ObjectId, ref: SchemaNames.organization },
     permissions: [{ type: String, enum: USER_PERMISSIONS_ENUM }],
 });
 
